@@ -1,0 +1,1070 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salma Hamraoui · 2026 portfolio</title>
+  <!-- Google Font: Outfit (modern, clean) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      background: #f8f4ff; /* light pastel background */
+      color: #2a2438; /* dark purple-grey text */
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* particle canvas background – lighter, softer particles */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(circle at 30% 40%, #f0eaff, #fdfaff);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header – light glass */
+    header {
+      position: sticky;
+      top: 1.2rem;
+      z-index: 100;
+      backdrop-filter: blur(16px) saturate(200%);
+      -webkit-backdrop-filter: blur(16px) saturate(200%);
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(200, 170, 255, 0.4);
+      border-radius: 60px;
+      padding: 0.7rem 2rem;
+      margin: 1rem 0 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 12px 30px rgba(160, 120, 255, 0.15);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      background: linear-gradient(145deg, #8b6ec9, #b794f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #4a3a6e;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s ease;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: #8b6ec9;
+      border-bottom-color: #b48aff;
+    }
+
+    .nav-links a.active-nav {
+      color: #8b6ec9;
+      border-bottom-color: #ffb27a;
+      font-weight: 600;
+    }
+
+    /* sections with smoother fade */
+    section {
+      margin-bottom: 6rem;
+      scroll-margin-top: 5rem;
+      opacity: 0;
+      transform: translateY(25px);
+      animation: fadeUp 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 2px solid rgba(139, 110, 201, 0.2);
+      padding-bottom: 0.8rem;
+      background: linear-gradient(135deg, #6b4e9e, #a07dd6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-title i {
+      color: #8b6ec9;
+      font-size: 2.5rem;
+      -webkit-text-fill-color: initial;
+      background: none;
+      filter: drop-shadow(0 0 5px #d4bbff);
+    }
+
+    /* home grid – light glass card */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 3rem;
+      padding: 2.5rem;
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      box-shadow: 0 30px 40px -15px rgba(139, 110, 201, 0.2);
+    }
+
+    .profile-frame {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      background: none;
+      border: none;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2.5rem;
+      box-shadow: 0 20px 25px -10px rgba(139, 110, 201, 0.3), 0 0 0 2px rgba(200, 170, 255, 0.4);
+      transition: transform 0.3s;
+    }
+    .profile-frame img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 25px 30px -8px rgba(139, 110, 201, 0.4), 0 0 0 3px #b48aff;
+    }
+
+    .bio h1 {
+      font-size: 4.2rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #6b4e9e, #9f7ad9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .bio .tagline {
+      font-size: 1.6rem;
+      color: #6b4e9e;
+      margin: 0.5rem 0 1rem;
+      font-weight: 300;
+      text-shadow: 0 0 8px #e2d3ff;
+    }
+
+    .bio p {
+      color: #3f3560;
+      margin-bottom: 1.8rem;
+      max-width: 650px;
+      font-weight: 300;
+      font-size: 1.1rem;
+    }
+
+    .contact-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .contact-mini span {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      font-size: 1rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 10px rgba(139, 110, 201, 0.1);
+      color: #3f3560;
+    }
+
+    .social-links a {
+      color: #8b6ec9;
+      font-size: 2.2rem;
+      margin-right: 1.5rem;
+      transition: 0.2s;
+      display: inline-block;
+    }
+
+    .social-links a:hover {
+      color: #ff9e7a;
+      transform: scale(1.15) translateY(-3px);
+      filter: drop-shadow(0 0 6px #ffbc8c);
+    }
+
+    /* timeline cards (experience & education) – light glass */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 2rem;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      border-radius: 2rem;
+      padding: 2rem;
+      transition: 0.3s;
+      box-shadow: 0 15px 25px -15px rgba(139, 110, 201, 0.2);
+    }
+
+    .timeline-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: #c8aaff;
+      transform: translateY(-5px);
+      box-shadow: 0 25px 30px -12px rgba(139, 110, 201, 0.3), 0 0 0 1px rgba(200, 170, 255, 0.5);
+    }
+
+    /* image container – larger, with soft frame & contain to avoid cropping */
+    .exp-pic-placeholder {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      order: 2;
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      box-shadow: 0 12px 25px -8px rgba(139, 110, 201, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+      transition: 0.2s;
+    }
+    .exp-pic-placeholder:hover {
+      border-color: #b48aff;
+      box-shadow: 0 15px 30px -5px rgba(139, 110, 201, 0.3), 0 0 0 2px rgba(180, 140, 255, 0.3);
+    }
+    .exp-pic-placeholder img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 6px rgba(139, 110, 201, 0.2));
+    }
+
+    .exp-content {
+      flex: 1;
+    }
+
+    .item-title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #2a2438;
+    }
+
+    .item-sub {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: #6b4e9e;
+      margin: 0.4rem 0 0.8rem;
+    }
+
+    .item-sub span {
+      background: rgba(200, 170, 255, 0.2);
+      padding: 0.2rem 1.3rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      border: 1px solid #b9a2e0;
+      backdrop-filter: blur(4px);
+      color: #2a2438;
+    }
+
+    /* skills with icons – light theme */
+    .skills-category {
+      margin-bottom: 2.5rem;
+    }
+    .skills-category h3 {
+      color: #6b4e9e;
+      margin-bottom: 1.2rem;
+      font-size: 1.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .skill-icon-item {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid #c2adf0;
+      border-radius: 40px;
+      padding: 0.6rem 1.6rem;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: #2a2438;
+      backdrop-filter: blur(4px);
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(139, 110, 201, 0.1);
+    }
+    .skill-icon-item:hover {
+      background: #ffffff;
+      border-color: #b48aff;
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 8px 15px rgba(180, 140, 255, 0.2);
+    }
+    .skill-icon-item i {
+      font-size: 1.3rem;
+      color: #8b6ec9;
+    }
+
+    /* certificate grid (unchanged) */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .doc-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      border-radius: 1.8rem;
+      padding: 1.2rem;
+      transition: 0.25s;
+      box-shadow: 0 10px 20px -10px rgba(139, 110, 201, 0.15);
+    }
+
+    .doc-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.8);
+      border-color: #c8aaff;
+      box-shadow: 0 20px 25px -10px rgba(139, 110, 201, 0.2), 0 0 0 1px #b48aff;
+    }
+
+    .doc-placeholder {
+      background: rgba(200, 170, 255, 0.2);
+      border: 2px dashed #b9a2e0;
+      border-radius: 1rem;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #8b6ec9;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .doc-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #2a2438;
+    }
+
+    .doc-card p {
+      font-size: 0.8rem;
+      color: #6b4e9e;
+    }
+
+    .badge {
+      background: rgba(180, 140, 255, 0.2);
+      border-radius: 30px;
+      padding: 0.2rem 0.9rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-block;
+      border: 1px solid #b48aff;
+      color: #2a2438;
+    }
+
+    /* ===== TRANSCRIPTS – horizontal row ===== */
+    .transcript-intro {
+      font-size: 1.4rem;
+      color: #6b4e9e;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+    .transcript-row {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: #b9a2e0 #f0eaff;
+    }
+    .transcript-row::-webkit-scrollbar {
+      height: 8px;
+    }
+    .transcript-row::-webkit-scrollbar-track {
+      background: #f0eaff;
+      border-radius: 10px;
+    }
+    .transcript-row::-webkit-scrollbar-thumb {
+      background: #b9a2e0;
+      border-radius: 10px;
+    }
+    .transcript-card {
+      flex: 0 0 240px; /* fixed width, adjust as needed */
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 10px 20px -10px rgba(139, 110, 201, 0.15);
+      cursor: pointer;
+    }
+    .transcript-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -10px rgba(139, 110, 201, 0.2);
+      border-color: #b48aff;
+    }
+    .transcript-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f0eaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .transcript-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .transcript-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+    .transcript-info h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: #2a2438;
+    }
+    .transcript-info p {
+      font-size: 0.85rem;
+      color: #6b4e9e;
+      margin-bottom: 0.5rem;
+    }
+    .transcript-info .badge {
+      background: rgba(180, 140, 255, 0.2);
+      border-radius: 30px;
+      padding: 0.2rem 0.9rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-block;
+      border: 1px solid #b48aff;
+      color: #2a2438;
+    }
+
+    /* gallery grid – light, now without description, images fit */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .gallery-item {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      transition: 0.25s;
+      box-shadow: 0 15px 25px -12px rgba(139, 110, 201, 0.15);
+      padding: 0;                /* remove any default padding */
+      aspect-ratio: 1 / 1;       /* make all squares */
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      border-color: #c8acff;
+      box-shadow: 0 20px 30px -10px rgba(139, 110, 201, 0.2);
+    }
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+    }
+    .gallery-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         /* fill square, might crop but looks uniform */
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    /* old description style removed – no longer used */
+
+    /* ===== INTERESTS – bigger pictures, 4 items ===== */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .interest-item {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(200, 170, 255, 0.3);
+      border-radius: 2rem;
+      padding: 1.8rem 0.5rem;
+      text-align: center;
+      transition: 0.2s;
+      box-shadow: 0 10px 18px -8px rgba(139, 110, 201, 0.1);
+    }
+    .interest-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: #b48aff;
+      transform: translateY(-5px);
+    }
+    .interest-pic {
+      width: 140px;      /* bigger */
+      height: 140px;
+      margin: 0 auto 1.2rem;
+      border-radius: 1.8rem;
+      overflow: hidden;
+      border: 1px solid rgba(139, 110, 201, 0.2);
+      box-shadow: 0 12px 18px -8px rgba(139, 110, 201, 0.25);
+    }
+    .interest-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .interest-item h4 {
+      font-weight: 500;
+      color: #2a2438;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(139, 110, 201, 0.2);
+      color: #6b4e9e;
+      font-size: 0.95rem;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 80%;
+      margin-top: 5%;
+    }
+    #modal-caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      font-size: 1.2rem;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #bbb;
+    }
+
+    /* responsive */
+    @media (max-width: 800px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-frame {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+      header {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .interests-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .interests-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline-item {
+        flex-direction: column;
+      }
+      .exp-pic-placeholder {
+        order: 0;
+        margin-left: 0;
+        align-self: center;
+        width: 140px;
+        height: 140px;
+      }
+      .transcript-card {
+        flex: 0 0 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="container">
+    <header>
+      <div class="logo">S.H.</div>
+      <div class="nav-links">
+        <a data-target="home" class="active-nav">Home</a>
+        <a data-target="experience">Experience</a>
+        <a data-target="education">Education</a>
+        <a data-target="skills">Skills</a>
+        <a data-target="certificates">Certificates</a>
+        <a data-target="transcripts">Transcripts</a>
+        <a data-target="gallery">Gallery</a>
+        <a data-target="interests">Interests</a>
+      </div>
+    </header>
+
+    <!-- HOME -->
+    <section id="home">
+      <div class="home-grid">
+        <div class="profile-frame">
+          <img src="pics/picture.JPG" alt="Salma Hamraoui">
+        </div>
+        <div class="bio">
+          <h1>Salma Hamraoui</h1>
+          <div class="tagline">سلمى حمراوي · aspiring engineer</div>
+          <p>12th‑grade high school student with a passion for robotics and technology. Demonstrates resilience, leadership, and strong problem‑solving skills, with a solid academic record and a clear drive to pursue engineering studies.</p>
+          <div class="contact-mini">
+            <span><i class="fas fa-phone-alt"></i> +212 651 701418</span>
+            <span><i class="fas fa-envelope"></i> Salmahamraouiii08@gmail.com</span>
+            <span><i class="fas fa-map-marker-alt"></i> Tangier, Morocco</span>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/salma-hamraoui/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Salmahamraouiii" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/salma_hm82/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+      <div class="timeline">
+        <!-- (all experience items unchanged) -->
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Intern – Tanger Med Utilities & Maroc Dispatch</div>
+            <div class="item-sub"><span>Dec 2025</span><span>Tangier</span></div>
+            <p>Observatory internship: observed electricity distribution, maintenance, and logistics in port and industrial settings for a school project (TOMI).</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/TANGERMED LOGO.png" alt="Tanger Med">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Developer & Designer – NASA Space Apps Challenge</div>
+            <div class="item-sub"><span>Oct 2025</span><span>UM6P Bengrir</span></div>
+            <p>Developed a Space Biology Knowledge Engine with the team in 48 hours.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/Colorway=2-Color Black@3x (1).png" alt="NASA Space Apps">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Leadership Mentor – MINDCRAFT Summer Camp</div>
+            <div class="item-sub"><span>Jun 2025 – Aug 2025</span><span>Tangier</span></div>
+            <p>Paid mentor (~120h): trained kids (5‑9 y.o.) in confidence, teamwork, leadership. Assisted as robotics teacher with Scratch.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/Capturmindcraft.PNG" alt="Mindcraft Summer Camp">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Volunteer – World Robot Olympiads</div>
+            <div class="item-sub"><span>May 2025</span><span>Casablanca</span></div>
+            <p>Volunteer as a Queer in the 2025 season. Helped with managing teams.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/nbgwro.webp" alt="WRO">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Documentation Lead & Team manager – FIRST Lego League</div>
+            <div class="item-sub"><span>Nov 2024 – Apr 2025</span><span>UM6P & USA</span></div>
+            <p>Documented project with Overleaf, managed team, won Robot Design Award, qualified for nationals & internationals, secured sponsorship (TMSA), and won Peer Award at FIRST Championship in Houston.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/FIRSTLOGO-removebg-preview (1).png" alt="FIRST Lego League">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Team Leader – World Robot Olympiads</div>
+            <div class="item-sub"><span>Apr 2024 – Jun 2024</span><span>Casablanca</span></div>
+            <p>Future Innovators Category – created a sustainability platform.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/nbgwro.webp" alt="WRO 2024">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Builder & Documentation Lead – VEXIQ Competition</div>
+            <div class="item-sub"><span>Dec 2023 – Mar 2024</span><span>ENSIAS, Rabat</span></div>
+            <p>Built robot, made Engineering Notebook, winner of Robot Design Award.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/NBGVEX.webp" alt="VEXIQ">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">Baccalauréat International science physique – (Physics stream)</div>
+            <div class="item-sub"><span>Sep 2025 – ongoing</span><span>Établissement Alwah, Tangier</span></div>
+            <p>Latest grades: 18.76 / 20 (GPA 3.75/4.0).</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/awlah.png" alt="Alwah">
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="exp-content">
+            <div class="item-title">1ère année Bac Sciences Mathématiques - (Mathematics stream)</div>
+            <div class="item-sub"><span>Sep 2024 – Jun 2025</span><span>Groupe scolaire Nilufer, Tangier</span></div>
+            <p>Top‑ranked student (GPA 3.85‑3.94). Regional exam: 18.35/20 – best in school.</p>
+          </div>
+          <div class="exp-pic-placeholder">
+            <img src="pics/nilufer.png" alt="Nilufer">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section-title"><i class="fas fa-cog"></i> Skills & languages</h2>
+      <div class="skills-category"><h3><i class="fas fa-microchip"></i> Hard skills</h3><div class="skills-grid"><span class="skill-icon-item"><i class="fas fa-robot"></i> Robotics</span><span class="skill-icon-item"><i class="fas fa-microchip"></i> Arduino & electronics</span><span class="skill-icon-item"><i class="fab fa-python"></i> MicroPython/Python</span><span class="skill-icon-item"><i class="fas fa-cube"></i> CAD & design</span><span class="skill-icon-item"><i class="fab fa-html5"></i> HTML/CSS/JavaScript</span><span class="skill-icon-item"><i class="fas fa-file-alt"></i> LaTeX/Overleaf</span><span class="skill-icon-item"><i class="fas fa-cube"></i> 3D printing</span><span class="skill-icon-item"><i class="fas fa-paint-brush"></i> Figma/Photoshop</span><span class="skill-icon-item"><i class="fas fa-table"></i> Excel/PowerPoint</span><span class="skill-icon-item"><i class="fab fa-github"></i> Git/GitHub</span><span class="skill-icon-item"><i class="fas fa-diagram-project"></i> Waterfall/Scrum/Agile</span><span class="skill-icon-item"><i class="fas fa-flask"></i> STEM education</span></div></div>
+      <div class="skills-category"><h3><i class="fas fa-users"></i> Soft skills</h3><div class="skills-grid"><span class="skill-icon-item"><i class="fas fa-comments"></i> Teamwork & communication</span><span class="skill-icon-item"><i class="fas fa-user-tie"></i> Leadership & team management</span><span class="skill-icon-item"><i class="fas fa-brain"></i> Critical thinking & problem‑solving</span><span class="skill-icon-item"><i class="fas fa-calendar-alt"></i> Organization & planning</span><span class="skill-icon-item"><i class="fas fa-sync-alt"></i> Adaptability & resilience</span><span class="skill-icon-item"><i class="fas fa-clock"></i> Time management</span><span class="skill-icon-item"><i class="fas fa-hand-holding-heart"></i> Youth mentoring</span></div></div>
+      <div class="skills-category"><h3><i class="fas fa-language"></i> Languages</h3><div class="skills-grid"><span class="skill-icon-item"><i class="fas fa-globe"></i> Arabic (native)</span><span class="skill-icon-item"><i class="fas fa-globe"></i> English (C1, TOEFL 99/120)</span><span class="skill-icon-item"><i class="fas fa-globe"></i> French (B2, DELF)</span><span class="skill-icon-item"><i class="fas fa-globe"></i> German (A1, Bremen Center)</span></div></div>
+    </section>
+
+    <!-- TRANSCRIPTS – 5 in one line, clickable (unchanged) -->
+    <section id="transcripts">
+      <h2 class="section-title"><i class="fas fa-scroll"></i> Academic performance</h2>
+      <p class="transcript-intro">Consistently achieved Here are some of my transcripts </p>
+      <div class="transcript-row">
+        <!-- Transcript 1 -->
+        <div class="transcript-card" data-full="marksheets/8th grade S1 trasnlated.PNG" data-text="8th grade, first semester (2021-2022) – class 2APIC-2 · avg 19.42">
+          <div class="transcript-img"><img src="marksheets/8th grade S1 trasnlated.PNG" alt="Transcript 1"></div>
+          <div class="transcript-info"><h4>8th grade S1</h4><p>2021-2022 · 2APIC-2</p><span class="badge">avg 19.42</span></div>
+        </div>
+        <!-- Transcript 2 -->
+        <div class="transcript-card" data-full="marksheets/8th grade S2.png" data-text="8th grade, second semester (2021-2022) – class 2APIC-2 · avg 19.45">
+          <div class="transcript-img"><img src="marksheets/8th grade S2.png" alt="Transcript 2"></div>
+          <div class="transcript-info"><h4>8th grade S2</h4><p>2021-2022 · 2APIC-2</p><span class="badge">avg 19.45</span></div>
+        </div>
+        <!-- Transcript 3 -->
+        <div class="transcript-card" data-full="marksheets/9th grade S1.png" data-text="9th grade, first semester translated (2022-2023) – class 3APIC-2">
+          <div class="transcript-img"><img src="marksheets/9th grade S1.png" alt="Transcript 3"></div>
+          <div class="transcript-info"><h4>9th grade S1</h4><p>2022-2023 · 3APIC-2</p><span class="badge">exam 19.5</span></div>
+        </div>
+        <!-- Transcript 4 -->
+        <div class="transcript-card" data-full="marksheets/9th grade S2.png" data-text="9th grade, second semester (2022-2023) – class 3APIC-2">
+          <div class="transcript-img"><img src="marksheets/9th grade S2.png" alt="Transcript 4"></div>
+          <div class="transcript-info"><h4>9th grade S2</h4><p>2022-2023 · 3APIC-2</p><span class="badge">avg 19.1</span></div>
+        </div>
+        <!-- Transcript 5 -->
+        <div class="transcript-card" data-full="marksheets/marsheet global.PNG" data-text="2nd Bac marksheet (2025-2026) – ref. 160226/K.B.32">
+          <div class="transcript-img"><img src="marksheets/marsheet global.PNG" alt="Transcript 5"></div>
+          <div class="transcript-info"><h4>2nd Bac marksheet</h4><p>2025-2026</p><span class="badge">ref. 160226/K.B.32</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= GALLERY SECTION – ADJUSTED: ONLY PHOTOS, NO TEXT, FITTED ========= -->
+    <section id="gallery">
+      <h2 class="section-title"><i class="fas fa-camera"></i> Gallery</h2>
+      <div class="gallery-grid">
+        <!-- All images from original, cleaned up, descriptions removed, each in a square fitted container -->
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/FLLNATIONALS.jpeg" alt="FLL team"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/FIRSTCHAMPIONSHIP2.PNG" alt="event"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/AARONSPYERNASA.PNG" alt="NASA Space Apps"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/FIRSTCHAMPIONSHIP3.PNG" alt="FIRST event"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/VEXIQTEAMM.PNG" alt="VEX IQ"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/ASTRONAUT.PNG" alt="astronaut encounter"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/FIRSTCHAMPIONSHIP4.PNG" alt="group photo"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="pics/FLLQUALI.jpeg" alt="FLL qualifiers"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/AWARDNATIONAL.PNG" alt="award ceremony"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/FRC.PNG" alt="FRC"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/ELECTRONICS.PNG" alt="electronics workshop"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/FIRSTCHAMPIONSHIP6.PNG" alt="group"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/CAD.PNG" alt="CAD design"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/FIRSTCHAMPIONSHIP1.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/VEXTEAM.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/UM6P.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/teamnasa.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/VEX.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/plane.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/NASAFIRST.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/MEDTRONICCOOLROBOT.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/QUALIFLL.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/WROO.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/PEERAWARD.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/MAROCDISPATCH.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/TANGERMED.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/MEDTRONICSEXPERIENCE.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/MINDCRAFTSENIORS.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/MINDCRAFTNATIONALS.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/NASACenter.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/HAXKATHONG.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/LEADERSHIP MENTOR.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/ECOFUTUREHUB.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/MENTORCLASS.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/TROPHEE.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/vex.jpeg" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/TANGERMED.PNG" alt="robotics"></div></div>
+        <div class="gallery-item"><div class="gallery-image"><img src="PICS/PHOTGRAPHING.PNG" alt="robotics"></div></div>
+      </div>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- INTERESTS – bigger pictures, 5 items with labels -->
+<section id="interests">
+  <h2 class="section-title"><i class="fas fa-heart"></i> Interests & Hobbies</h2>
+  <div class="interests-grid">
+    <div class="interest-item">
+      <div class="interest-pic"><img src="pics/BOOKS.jpeg" alt="Reading"></div>
+      <h4>Reading</h4>
+    </div>
+    <div class="interest-item">
+      <div class="interest-pic"><img src="pics/CAKE.jpeg" alt="Baking"></div>
+      <h4>Baking</h4>
+    </div>
+    <div class="interest-item">
+      <div class="interest-pic"><img src="pics/F1.jpeg" alt="Formula 1 & Automotives"></div>
+      <h4>Formula 1 & Automotives</h4>
+    </div>
+    <div class="interest-item">
+      <div class="interest-pic"><img src="pics/ART.jpeg" alt="Painting"></div>
+      <h4>Painting</h4>
+    </div>
+  </div>
+</section>
+    <footer>
+      <p>© 2026 Salma Hamraoui ·  </p>
+    </footer>
+  </div>
+
+  <!-- Modal for transcripts -->
+  <div id="transcript-modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-full-image">
+    <div id="modal-caption"></div>
+  </div>
+
+  <!-- particle animation script + modal logic -->
+  <script>
+    (function() {
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      let particles = [];
+
+      function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w;
+        canvas.height = h;
+        initParticles();
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < 150; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            size: Math.random() * 5 + 1.5,
+            color: `rgba(139, 110, 201, ${Math.random() * 0.3 + 0.1})` // soft purple
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+        });
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      draw();
+
+      // nav highlighting + smooth scroll
+      const navLinks = document.querySelectorAll('.nav-links a');
+      const sections = document.querySelectorAll('section');
+
+      function setActiveLink() {
+        let scrollPos = window.scrollY + 130;
+        sections.forEach(sec => {
+          if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+            navLinks.forEach(link => {
+              link.classList.remove('active-nav');
+              if (link.getAttribute('data-target') === sec.getAttribute('id')) {
+                link.classList.add('active-nav');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', setActiveLink);
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('data-target');
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // ----- Transcript modal functionality -----
+      const modal = document.getElementById('transcript-modal');
+      const modalImg = document.getElementById('modal-full-image');
+      const captionText = document.getElementById('modal-caption');
+      const closeBtn = document.querySelector('.close');
+
+      // Attach click event to each transcript card
+      document.querySelectorAll('.transcript-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const full = this.dataset.full;
+          const text = this.dataset.text;
+          modal.style.display = 'block';
+          modalImg.src = full;
+          captionText.innerHTML = text;
+        });
+      });
+
+      // Close modal when clicking on (x)
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+
+      // Close modal when clicking outside the image
+      window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+```
